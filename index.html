@@ -1,0 +1,751 @@
+<!doctype html><html ng-app="volumio"><head><meta charset="utf-8"><title>Volumio - Audiophile Music Player</title><meta name="description" content=""><base href="/"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><link rel="shortcut icon" type="image/png" ng-href="{{favicon}}"><link rel="manifest" ng-href="{{variantAssetsUrl}}/manifest.json"><link rel="apple-touch-icon" sizes="57x57" ng-href="{{touchIconsUrl}}/apple-touch-icon-57x57.png"><link rel="apple-touch-icon" sizes="60x60" ng-href="{{touchIconsUrl}}/apple-touch-icon-60x60.png"><link rel="apple-touch-icon" sizes="72x72" ng-href="{{touchIconsUrl}}/apple-touch-icon-72x72.png"><link rel="apple-touch-icon" sizes="76x76" ng-href="{{touchIconsUrl}}/apple-touch-icon-76x76.png"><link rel="apple-touch-icon" sizes="114x114" ng-href="{{touchIconsUrl}}/apple-touch-icon-114x114.png"><link rel="apple-touch-icon" sizes="120x120" ng-href="{{touchIconsUrl}}/apple-touch-icon-120x120.png"><link rel="apple-touch-icon" sizes="144x144" ng-href="{{touchIconsUrl}}/apple-touch-icon-144x144.png"><link rel="apple-touch-icon" sizes="152x152" ng-href="{{touchIconsUrl}}/apple-touch-icon-152x152.png"><link rel="apple-touch-icon" sizes="180x180" ng-href="{{touchIconsUrl}}/apple-touch-icon-180x180.png"><link rel="icon" type="image/png" ng-href="{{touchIconsUrl}}/android-chrome-192x192.png" sizes="192x192"><link rel="mask-icon" ng-href="{{touchIconsUrl}}/safari-pinned-tab.svg" color="#5bbad5"><link rel="apple-touch-startup-image" ng-href="{{touchIconsUrl}}/apple-touch-icon-180x180.png"><meta name="msapplication-TileColor" content="#4bbe87"><meta name="msapplication-navbutton-color" content="black"><meta name="msapplication-TileImage" content="{{touchIconsUrl}}/mstile-144x144.png"><meta name="msapplication-config" content="{{touchIconsUrl}}/browserconfig.xml"><meta name="apple-mobile-web-app-title" content="Volumio"><meta name="theme-color" content="black"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="stylesheet" href="styles/vendor-13e30102ee.css"><link rel="stylesheet" href="styles/app-55b9d7d97a.css"></head><body style="overflow: hidden"><!--[if lt IE 10]>
+ <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+ <![endif]--><div ui-view="layout"></div><div id="cssExposer"></div><script src="scripts/vendor-5984c6714f.js"></script><script src="scripts/app-6210dfe818.js"></script><script>
+    window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-92970181-1', 'auto');
+    ga('send', 'pageview');
+    </script>
+	<style>
+
+	.button {
+		position: fixed;
+		padding: 7px 14px;
+		color: white;
+		font-family: 'Lato';
+		font-weight: bold;
+		font-size: 12px;
+		text-align: center;
+		border: none;
+		border-radius: 3px;
+		display: inline-block;
+		z-index: 100;
+		}
+    @media screen and (max-width: 1920px) {
+    	.img_up {
+			visibility: visible;
+            position: relative;
+            z-index:1;
+			left: 86%;
+			top: 387.5px;
+    	}
+    	.img_down {
+			visibility: visible;
+            position: absolute;
+            z-index:1;
+			left: -115px;
+			top: 0px;
+		}
+    	.img_muse {
+			visibility: visible;
+            position: absolute;
+            z-index:1;
+			left: -55px;
+			top: 0px;
+		}
+        .img_black {
+			visibility: visible;
+            position: absolute;
+            z-index:-10;
+			left: -120px;
+			top: -2.5px;
+        }		
+		.img_voice {
+			visibility: hidden;
+		}
+		.img_bg {
+			visibility: hidden;
+		}
+		.img_bg2 {
+			visibility: hidden;
+		}
+		.img_num {
+			visibility: hidden;
+		}
+		.img_up_s {
+			visibility: hidden;
+    	}
+    	.img_down_s {
+			visibility: hidden;
+		}
+		.img_dot {
+			visibility: hidden;
+		}
+    }
+	@media screen and (max-width: 770px) { 
+    	.img_up {
+			visibility: hidden;
+            /* position: fixed;
+            z-index:100;
+			left: 0px;
+			top: unset;
+			bottom: 160px; */
+    	}
+    	.img_down {
+			visibility: hidden;
+            /* position: fixed;
+            z-index:100;
+			left: 0px;
+			top: unset;
+			bottom: 50px; */
+		}
+    	.img_muse {
+			visibility: hidden;
+            /* position: absolute;
+			z-index:100;
+			left: -55px;
+			top: 0px; */
+    	}
+        .img_black {
+			visibility: hidden;
+            /* position: fixed;
+			z-index:-100;
+			left: -120px;
+			top: -2.5px; */
+        }
+		.img_voice {
+			visibility: visible;
+			position: fixed;
+			z-index: 2;
+			left: 0px;
+			bottom: 0px;
+		}
+		.img_bg {
+			visibility: hidden;
+			position: fixed;
+			z-index: 90;
+			top: unset;
+			left: 0px;
+			bottom: 70px;
+			width: 50px;
+			height: 100px;
+			background-color: #000000;
+			opacity: 0.7;
+		}		
+		.img_bg2 {
+			visibility: visible;
+			position: fixed;
+			z-index: 90;
+			top: unset;
+			left: 50px;
+			bottom: 50px;
+			width: 70px;
+			height: 100px;
+			background-color: #000000;
+			opacity: 0.7;
+		}
+		.img_num {
+			visibility: hidden;
+			position: fixed;
+			z-index: 110;
+			left: 5px;
+			top: unset;
+			bottom: 110px;
+			width: 40px;
+			font-size: 24px;
+			font-family: "Lato";
+			text-align: center;
+      		color: #54C688;
+		}    	
+		.img_up_s {
+			visibility: hidden;
+            position: fixed;
+            z-index:100;
+			left: 0px;
+			top: unset;
+			bottom: 160px;
+    	}
+    	.img_down_s {
+			visibility: hidden;
+            position: fixed;
+            z-index:100;
+			left: 0px;
+			top: unset;
+			bottom: 50px;
+		}
+		.img_dot {
+			visibility: visible;
+			position: fixed;
+			z-index: 10;
+			left: 55px;
+			top: unset;
+			bottom: 0px;
+		}
+	}
+	@media screen and (max-width: 1920px) {
+		.bl {
+			background-color: #54C688;
+			left: 35%;
+			top: 10px;
+			bottom: unset;
+		}
+		.bd {
+			background-color: #DF4649;
+			left: 60%;
+			top: 10px;
+			bottom: unset;
+		}
+		.bl_s {
+			visibility: hidden;
+		}
+		.bd_s {
+			visibility: hidden;
+		}
+	}
+	@media screen and (max-width: 770px) {
+		.bl {
+			visibility: hidden;
+		}
+		.bd {
+			visibility: hidden;
+		}
+		.bl_s {
+            position: fixed;
+			z-index: 10;
+			visibility: hidden;
+			left: 55px;
+			top: unset;
+			bottom: 75px;
+		}
+		.bd_s {
+            position: fixed;
+			visibility: hidden;
+			z-index: 10;
+			left: 120px;
+			top: unset;
+			bottom: 75px;
+		}
+	}
+	.bl:hover {
+		background-color: #339A62;
+	}
+	.bd:hover {
+		background-color: #B92023;
+	}	
+	.bl_s:hover {
+		background-color: #339A62;
+	}
+	.bd_s:hover {
+		background-color: #B92023;
+	}
+	.button:disabled {
+		background-color: #333;
+		cursor: wait;
+		opacity: 0.3;
+	}
+	@media screen and (max-width: 1920px) {
+		.br {
+			visibility: visible;
+			position: fixed;
+			padding: 6px 6px;
+			left: 90%;
+			top: 16px;
+			background-color: transparent;
+			border: 2.5px solid #54c6c1;
+			border-radius: 10px;
+			transition-duration: 0.2s;
+			z-index: 10;
+		}
+		.ur {
+			visibility: visible;
+			position: fixed;
+			padding: 6px 6px;
+			left: 15%;
+			top: 16px;
+			background-color: transparent;
+			border: 2.5px solid #546ec6;
+			border-radius: 10px;
+			transition-duration: 0.2s;
+			z-index: 10;
+		}
+		.br_s{
+			visibility: hidden;
+		}
+		.ur_s{
+			visibility: hidden;
+		}
+		.upload_btn{
+			visibility: visible;
+			position: fixed;
+			left: 72%;
+			top: 8px;
+			z-index: 10;
+		}
+		.upload_btn_s{
+			visibility: hidden;
+		}
+		.wifi{
+			visibility: visible;
+			position: fixed;
+			left: 81%;
+			top: 8px;
+			z-index: 10;
+		}
+		.wifi_s{
+			visibility: hidden;
+		}
+		.eq{
+			visibility: visible;
+			position: fixed;
+			left: 24%;
+			top: 8px;
+			z-index: 100;
+			height: 40px;
+			width: 40px;
+		}
+		.bt{
+			visibility: visible;
+			position: fixed;
+			left: 30%;
+			top: 6px;
+			z-index: 100;
+		}
+		.eq_s{
+			visibility: hidden;
+		}
+		.bt_s{
+			visibility: hidden;
+		}
+		.bk{
+			visibility: hidden;
+		}
+	}
+	@media screen and (max-width: 770px) {
+		.br {
+			visibility: hidden;
+		}
+		.ur {
+			visibility: hidden;
+		}
+		.br_s{
+			visibility: hidden;
+			position: fixed;
+			background-color: transparent;
+			border: none;
+			left: 260px;
+			bottom: 85px;
+			z-index: 1;
+		}
+		.ur_s{
+			visibility: hidden;
+			position: fixed;
+			background-color: transparent;
+			border: none;
+			left: 260px;
+			bottom: 157px;
+			z-index: 1;
+		}
+		.upload_btn{
+			visibility: hidden;
+		}
+		.upload_btn_s {
+			visibility: hidden;
+			position: fixed;
+			left: 195px;
+			bottom: 80px;
+			z-index: 1;
+		}
+		.wifi{
+			visibility: hidden;
+		}
+		.wifi_s{			
+			visibility: hidden;
+			position: fixed;
+			left: 55px;
+			bottom: 140px;
+			z-index: 1;
+		}
+		.eq{
+			visibility: hidden;
+		}
+		.bt{
+			visibility: hidden;
+		}
+		.eq_s{
+			visibility: hidden;
+			position: fixed;
+			left: 125px;
+			bottom: 140px;
+			z-index: 1;
+		}
+		.bt_s{
+			visibility: hidden;
+			position: fixed;
+			left: 190px;
+			bottom: 140px;
+			z-index: 1;
+		}
+		.bk{
+			visibility: hidden;
+			position: fixed;
+			left: 40px;
+			bottom: 50px;
+			width: 280px;
+			height:150px;
+			background-color: #3d3d3d;
+			opacity:0.9;
+			z-index: 1;
+		}
+	}
+	.br:hover {
+		background-color: transparent;
+		border: 2.5px solid #339a96;
+		cursor: help;
+	}
+	.br:disabled {
+		border: 2.5px solid #333;
+		cursor: wait;
+		opacity:0.3;
+	}
+	@media screen and (max-width: 1920px) and (min-width: 1080px) {
+		p {
+			position: fixed;
+			font-family: 'Lato';
+			font-size: 10px;
+			line-height: 140%;
+			left: 200px;
+			top: 12px;
+			z-index: 20;
+			opacity: 0.9;
+			cursor: default;
+		}
+	}
+	@media screen and (max-width: 770px) {
+		p {
+			visibility: hidden;
+		}
+	}
+	</style>
+	<button id="Like" class="button bl" title="Like EQ" onclick="lfunc()" >Like</button>
+	<button id="Dislike"class="button bd" title="Dislike EQ" onclick="dfunc()">Dislike</button>
+	<button id="Refresh" class="br" title="Refresh EQ" onclick="rfunc()"></button>
+	<button id="reupload" class="ur" title="Refresh EQ" onclick="ufunc()"></button>
+  <img src="upload.png" id="uploadBtn" alt="upbtn" class="upload_btn" width="35" height="35" onclick="location.href='http://192.168.211.1:8080'">
+  <img src="wifi.png" id="wifiBtn" alt="wifibtn" class="wifi" width="35" height="35" onclick="location.href='http://192.168.211.1/wifi.html'">
+  <img src="bluetooth-off.png"  class="bt" id="bt_simg"   alt="eq" width="45" height="45" onclick="btfunc()">
+  <img src="equalizer.png" class="eq"  alt="eq" width="45" height="45" onclick="location.href='http://192.168.211.1/equalizer.html'">
+	<body id="volbody">
+		<div class="img_up" id="upBtn">
+			<img src="up.png" alt="volUp" width="50" height="45" onclick="vu()">
+			<div class="img_black" id="blackBtn">
+				<img src="black.png" alt="black" width="175" height="52">	
+		  	</div> 
+			<div class="img_down" id="downBtn">
+				<img src="down.png" alt="volDown" width="50" height="45" onclick="vd()">		
+			</div>	        
+      		<div class="img_muse" id="museBtn">
+				<img src="muse.png" alt="volMuse" width="50" height="45" onclick="vm()">	
+			</div>     
+		</div>
+	</body>
+	<body>
+		<div class="img_voice">
+			<img src="up.png" alt="Vol" width="50" height="50" onclick="vv()">
+		</div>
+		<div class="img_up_s" id="Up">
+			<img src="up.png" alt="volup" width="50" height="45" onclick="vu()">
+		</div>
+		<div class="img_down_s" id="Down">
+			<img src="down.png" alt="voldown" width="50" height="45" onclick="vd()">
+		</div>
+		<div id="bg" class="img_bg"></div>
+		<div id="num" class="img_num">50</div>
+	</body>
+	<body>
+		<div id="bkimg" class="bk"></div>
+		<div class="img_dot">
+			<img src="dot.png" id="dotBtn" alt="dot" width="40" height="45" onclick="dot()">
+		</div>
+		<div class="bl_s" id="Like_s">
+			<img src="good.png" alt="good" width="45" height="45" onclick="lfunc()">
+		</div>
+		<div class="bd_s" id="Dislike_s">
+			<img src="notgood.png" alt="good" width="45" height="45" onclick="dfunc()">
+		</div>
+		<button id="refresh" class="br_s" onclick="rfunc()">
+			<img src="br.png" alt="br" width="15" height="15">
+		</button>
+		<button id="reupload_s" class="ur_s" title="fix upload"   onclick="ufunc()">
+			<img src="ur.png" alt="ur" width="15" height="15">
+		</button>
+	<img src="upload.png" id="uploadBtn_s" alt="upbtn" class="upload_btn_s" width="35" height="35" onclick="location.href='http://192.168.211.1:8080'">
+	<div class="wifi_s" id="wifi_s">
+		<img src="wifi.png" alt="wifi" width="45" height="45" onclick="location.href='http://192.168.211.1/wifi.html'">
+	</div>
+	<div class="eq_s" id="eq_s">
+		<img src="equalizer.png" alt="eq" width="40" height="40" onclick="location.href='http://192.168.211.1/equalizer.html'">
+	</div>
+	<div class="bt_s" id="bt_s">
+		<img src="bluetooth-off.png" id="bt_simg_s"   alt="eq" width="50" height="50" onclick="btfunc()">
+	</div>
+	</body>
+	<script>
+		var selected;
+		var volFlag;
+		var taFlag;
+		var ldFlag;
+		var hiddenFlag;
+		var bigView;
+		var volume = 50;
+		volFlag = 0;
+		taFlag = 1;
+		ldFlag = 0;
+		hiddenFlag = 0; //visible
+		bigView = 1;
+
+
+		$(function() {
+			setTimeout(function() {
+				$.get("volume.json", function(data, status){
+					console.log("data = " + data);
+					document.getElementById("volumetext").innerText = String(data);
+					document.getElementById("num").innerText = data;
+					volume = data;
+				});
+			},500);
+			
+			$(window).resize(function(){
+				if(document.body.clientWidth <= 770){
+					document.getElementById("upBtn").style.visibility = "hidden";
+					document.getElementById("blackBtn").style.visibility = "hidden";
+					document.getElementById("museBtn").style.visibility = "hidden";
+					document.getElementById("downBtn").style.visibility = "hidden";
+				}
+				else{
+					if(hiddenFlag == 0){
+						document.getElementById("upBtn").style.visibility = "visible";
+						document.getElementById("blackBtn").style.visibility = "visible";
+						document.getElementById("museBtn").style.visibility = "visible";
+						document.getElementById("downBtn").style.visibility = "visible";
+					}
+					document.getElementById("Like_s").style.visibility = "hidden";		
+					document.getElementById("bkimg").style.visibility = "hidden";			
+					document.getElementById("Dislike_s").style.visibility = "hidden";
+					document.getElementById("refresh").style.visibility = "hidden";
+					document.getElementById("reupload_s").style.visibility = "hidden";
+					document.getElementById("uploadBtn_s").style.visibility = "hidden";
+					document.getElementById("wifi_s").style.visibility = "hidden";
+					document.getElementById("eq_s").style.visibility = "hidden";
+					document.getElementById("bt_s").style.visibility = "hidden";
+					document.getElementById("dotBtn").src="dot.png";
+					ldFlag = 0;
+					document.getElementById("Up").style.visibility = "hidden";
+					document.getElementById("Down").style.visibility = "hidden";
+					document.getElementById("bg").style.visibility = "hidden";
+					document.getElementById("num").style.visibility = "hidden";
+					volFlag = 0;
+					document.getElementById("volumetext").innerText = volume;
+				}
+			});
+		});
+    	function lfunc() {
+			selected = 1;
+			sendfunc();
+			document.getElementById("Like").disabled = true;
+			document.getElementById("Dislike").disabled = true;
+			document.getElementById("Refresh").disabled = true;
+			document.getElementById("Like_s").disabled = true;
+			document.getElementById("Dislike_s").disabled = true;
+			document.getElementById("refresh").disabled = true;
+			setTimeout(function() {
+				document.getElementById("Like").disabled = false;
+				document.getElementById("Dislike").disabled = false;
+				document.getElementById("Refresh").disabled = false;
+				document.getElementById("Like_s").disabled = false;
+				document.getElementById("Dislike_s").disabled = false;
+				document.getElementById("refresh").disabled = false;
+			}, 5000);
+		}
+    	function dfunc() {
+			selected = 0;
+			sendfunc();
+			document.getElementById("Like").disabled = true;
+			document.getElementById("Dislike").disabled = true;
+			document.getElementById("Refresh").disabled = true;
+			document.getElementById("Like_s").disabled = true;
+			document.getElementById("Dislike_s").disabled = true;
+			document.getElementById("refresh").disabled = true;
+			setTimeout(function() {
+				document.getElementById("Like").disabled = false;
+				document.getElementById("Dislike").disabled = false;
+				document.getElementById("Refresh").disabled = false;
+				document.getElementById("Like_s").disabled = false;
+				document.getElementById("Dislike_s").disabled = false;
+				document.getElementById("refresh").disabled = false;
+			}, 5000);
+		}
+		function rfunc() {
+			var r = confirm("Are you sure to refresh EQ?");
+			if (r == true) {
+				selected = 2;
+				sendfunc();
+				document.getElementById("Like").disabled = true;
+			    document.getElementById("Dislike").disabled = true;
+			    document.getElementById("Refresh").disabled = true;
+				document.getElementById("Like_s").disabled = true;
+				document.getElementById("Dislike_s").disabled = true;
+				document.getElementById("refresh").disabled = true;
+			    setTimeout(function() {
+					document.getElementById("Like").disabled = false;
+			        document.getElementById("Dislike").disabled = false;
+			        document.getElementById("Refresh").disabled = false;
+					document.getElementById("Like_s").disabled = false;
+					document.getElementById("Dislike_s").disabled = false;
+					document.getElementById("refresh").disabled = false;
+			    }, 5000);
+			}
+		}
+		function ufunc(){
+			selected = 13;
+			sendfunc();
+		}
+	  function vu() {
+			selected = 3;
+			volume += 10;
+			if(volume > 100)
+				volume = 100;
+			document.getElementById("num").innerText = volume;
+			if(document.getElementById("volumetext") != null){
+				document.getElementById("volumetext").innerText = volume;
+			}
+			sendfunc();
+		}
+    function vd() {
+			selected = 4;
+			volume -= 10;
+			if(volume < 0)
+				volume = 0;
+			document.getElementById("num").innerText = volume;
+			if(document.getElementById("volumetext") != null){
+				document.getElementById("volumetext").innerText = volume;
+			}
+			sendfunc();
+		}
+    function vm() {
+			selected = 5;
+			sendfunc();
+		}
+		function vv() {
+			if(volFlag == 0){
+				document.getElementById("Up").style.visibility = "visible";
+				document.getElementById("Down").style.visibility = "visible";
+				document.getElementById("bg").style.visibility = "visible";
+				document.getElementById("num").style.visibility = "visible";
+				volFlag = 1;
+				$.get("volume.json", function(data, status){
+					document.getElementById("num").innerText = data;
+					volume = data;
+				});
+			}
+			else if(volFlag == 1){
+				document.getElementById("Up").style.visibility = "hidden";
+				document.getElementById("Down").style.visibility = "hidden";
+				document.getElementById("bg").style.visibility = "hidden";
+				document.getElementById("num").style.visibility = "hidden";
+				volFlag = 0;
+			}
+		}
+		function music(){
+			document.getElementById("upBtn").style.visibility = "visible";
+			document.getElementById("downBtn").style.visibility = "visible";
+			document.getElementById("museBtn").style.visibility = "visible";
+			document.getElementById("blackBtn").style.visibility = "visible";
+		}
+		function notmu(){
+			document.getElementById("upBtn").style.visibility = "hidden";
+			document.getElementById("downBtn").style.visibility = "hidden";
+			document.getElementById("museBtn").style.visibility = "hidden";
+			document.getElementById("blackBtn").style.visibility = "hidden";
+		}
+		function dot(){
+			if(ldFlag == 1){
+				document.getElementById("Like_s").style.visibility = "hidden";		
+				document.getElementById("bkimg").style.visibility = "hidden";			
+				document.getElementById("Dislike_s").style.visibility = "hidden";
+				document.getElementById("refresh").style.visibility = "hidden";
+				document.getElementById("reupload_s").style.visibility = "hidden";
+				document.getElementById("uploadBtn_s").style.visibility = "hidden";
+				document.getElementById("wifi_s").style.visibility = "hidden";
+				document.getElementById("eq_s").style.visibility = "hidden";
+				document.getElementById("bt_s").style.visibility = "hidden";
+				document.getElementById("dotBtn").src="dot.png";
+				ldFlag = 0;
+			}
+			else if(ldFlag ==0){
+				document.getElementById("Like_s").style.visibility = "visible";		
+				document.getElementById("bkimg").style.visibility = "visible";				
+				document.getElementById("Dislike_s").style.visibility = "visible";
+				document.getElementById("refresh").style.visibility = "visible";
+				document.getElementById("reupload_s").style.visibility = "visible";
+				document.getElementById("uploadBtn_s").style.visibility = "visible";
+				document.getElementById("wifi_s").style.visibility = "visible";
+				document.getElementById("eq_s").style.visibility = "visible";
+				document.getElementById("bt_s").style.visibility = "visible";
+				document.getElementById("dotBtn").src="close.png";
+				ldFlag = 1;
+			}
+		}
+		function upload(){
+			selected = 6;
+			sendfunc();
+		}
+		function btfunc(){
+			selected = 9;
+			document.getElementById("bt_simg").src = "bluetooth.png";
+			document.getElementById("bt_simg_s").src = "bluetooth.png";
+			setTimeout(function(){document.getElementById("bt_simg").src = "bluetooth-off.png"; }, 10000);
+			setTimeout(function(){document.getElementById("bt_simg_s").src = "bluetooth-off.png"; }, 10000);
+			sendfunc();
+		}
+		function testfunc(){
+			document.getElementById("upBtn").style.visibility = "hidden";
+			document.getElementById("blackBtn").style.visibility = "hidden";
+			document.getElementById("museBtn").style.visibility = "hidden";
+			document.getElementById("downBtn").style.visibility = "hidden";
+			hiddenFlag = 1;
+		}
+		function playfunc(){
+			console.log(document.body.clientWidth);
+			if(document.body.clientWidth > 770){
+				document.getElementById("upBtn").style.visibility = "visible";
+				document.getElementById("blackBtn").style.visibility = "visible";
+				document.getElementById("museBtn").style.visibility = "visible";
+				document.getElementById("downBtn").style.visibility = "visible";
+				hiddenFlag = 0;
+			}
+			setTimeout(function() {
+				document.getElementById("volumetext").innerText = volume;
+			},500);
+		}
+		function queuefunc(){
+			document.getElementById("upBtn").style.visibility = "hidden";
+			document.getElementById("blackBtn").style.visibility = "hidden";
+			document.getElementById("museBtn").style.visibility = "hidden";
+			document.getElementById("downBtn").style.visibility = "hidden";
+			hiddenFlag = 1;
+		}
+		function inifunc(){
+			console.log("inifunc...");
+			document.getElementById("volumetext").innerText = volume;
+		}
+		function sendfunc() {
+			var info = {
+				select : selected,
+			}
+			var userdata = JSON.stringify(info);
+			console.log(userdata);
+			$.ajax({
+				type:'POST',
+				url:'http://192.168.211.1:6140',
+				data:userdata,
+				success: function(retval) {
+					console.log(retval);
+				},
+				error:function() {
+					console.log("<error> HUGIN flew away =[");
+				}
+			});
+		}
+	</script>
+	<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+	<!-- <p><span style="color:#54C688;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PROJECT</span></br><span style="color:#7a848e;">HUGIN MUNIN</span></p> -->
+	</body></html>

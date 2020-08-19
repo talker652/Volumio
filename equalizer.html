@@ -1,0 +1,1268 @@
+<!doctype html>
+<html lang="us">
+<head>
+	<meta charset="utf-8">
+	<title>Equalizer</title>
+	<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+</head>
+<!-- 
+ <script src="/css/j/lazyload-min.js" type="text/javascript"></script>
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+ </script> -->
+
+
+<body>
+<header style="display: block;margin-top: -10px; margin-left: -10px; margin-right:0px; padding: 0; border: 0;  color: lightgreen; background-color:rgb(25, 25, 25); height: 50px; font-size: 40px; width: 103%;">&nbsp;&nbsp;Equalizer
+
+</header>  
+<div style="height: 40px;">
+    <input  class="text" type="text" id="eq_name">  
+    <button class="saveBtn" onclick="save()">Save</button>
+    <button class="loadBtn" onclick="load(theList)" id="load">...</button>
+</div>
+
+<form id="form">
+  <p>
+  <select id=theList size=5 class="list" onChange="renew(this.value)">
+    <!-- <option value=星期一>test1
+    <option value=星期三>test2
+    <option value=星期五>test3
+    <option value=星期日>test4 -->
+  </select>
+  </form>
+    <button id="OK" class="OKbtn" onclick="OKfunc()">
+    OK
+  </button>
+  <button id="Del" class="Delbtn" onclick="Delfunc()">
+    Del
+  </button>
+
+<div>
+<!-- Slider -->
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">21Hz (dB)</div>
+        <div id="amount1" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider1"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">26Hz (dB)</div>
+        <div id="amount2" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider2"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">30Hz (dB)</div>
+        <div id="amount3" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider3"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">36Hz (dB)</div>
+        <div id="amount4" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider4"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">43Hz (dB)</div>
+        <div id="amount5" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider5"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">51Hz (dB)</div>
+        <div id="amount6" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider6"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">61Hz (dB)</div>
+        <div id="amount7" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider7"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">73Hz (dB)</div>
+        <div id="amount8" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider8"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">87Hz (dB)</div>
+        <div id="amount9" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider9"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">103Hz (dB)</div>
+        <div id="amount10" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider10"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">123Hz (dB)</div>
+        <div id="amount11" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider11"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">146Hz (dB)</div>
+        <div id="amount12" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider12"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">173Hz (dB)</div>
+        <div id="amount13" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider13"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">206Hz (dB)</div>
+        <div id="amount14" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider14"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">245Hz (dB)</div>
+        <div id="amount15" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider15"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">291Hz (dB)</div>
+        <div id="amount16" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider16"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">346Hz (dB)</div>
+        <div id="amount17" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider17"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">412Hz (dB)</div>
+        <div id="amount18" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider18"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">489Hz (dB)</div>
+        <div id="amount19" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider19"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">582Hz (dB)</div>
+        <div id="amount20" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider20"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">692Hz (dB)</div>
+        <div id="amount21" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider21"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">822Hz (dB)</div>
+        <div id="amount22" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider22"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">977Hz (dB)</div>
+        <div id="amount23" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider23"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">1166Hz (dB)</div>
+        <div id="amount24" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider24"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">1380Hz (dB)</div>
+        <div id="amount25" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider25"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">1641Hz (dB)</div>
+        <div id="amount26" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider26"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">1950Hz (dB)</div>
+        <div id="amount27" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider27"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">2318Hz (dB)</div>
+        <div id="amount28" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider28"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">2755Hz (dB)</div>
+        <div id="amount29" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider29"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">3274Hz (dB)</div>
+        <div id="amount30" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider30"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">3891Hz (dB)</div>
+        <div id="amount31" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider31"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">4625Hz (dB)</div>
+        <div id="amount32" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider32"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">5497Hz (dB)</div>
+        <div id="amount33" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider33"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">6533Hz (dB)</div>
+        <div id="amount34" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider34"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">7765Hz (dB)</div>
+        <div id="amount35" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider35"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">9228Hz (dB)</div>
+        <div id="amount36" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider36"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">10968Hz (dB)</div>
+        <div id="amount37" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider37"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">13036Hz (dB)</div>
+        <div id="amount38" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider38"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">15493Hz (dB)</div>
+        <div id="amount39" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider39"></div>
+    </div>
+    <div style="height: 80px">
+        <div style="font-size: 30px; color:ivory;">18413Hz (dB)</div>
+        <div id="amount40" style="color:#f6931f; font-weight:bold; margin-right:100px; float: left; font-size: 30px">0</div>
+        <div id="slider40"></div>
+    </div>
+</div>
+<style>
+    .saveBtn{
+      top : 8px;
+      left : 20px;
+      font-size: 16px;
+      position: relative;
+    }
+    .loadBtn{
+      top : 8px;
+      left : 25px;
+      font-size: 16px;
+      position: relative;      
+    }
+    .OKbtn{
+      position: absolute;
+      z-index: 10;
+      visibility: hidden;
+      left: 203px;
+    }
+    .Delbtn{
+      position: absolute;
+      z-index: 10;
+      visibility: hidden;
+      left: 250px;
+    }
+    .list{
+      position: absolute;
+      z-index: 10;
+      visibility: hidden;
+      width: 173px;
+      left: 20px;
+    }
+    .text{
+      top : 8px;
+      left: 10px;
+      font-size: 16px;
+      position: relative;
+    }
+    body{
+        background-color:rgb(65, 65, 65);
+        height:100%;
+    }	
+    #slider1, #slider2, #slider3, #slider4, #slider5, #slider6, #slider7, #slider8, #slider9, #slider10, #slider11, #slider12, #slider13, #slider14, #slider15, #slider16, #slider17, #slider18, #slider19, #slider20, #slider21, #slider22, #slider23, #slider24, #slider25, #slider26, #slider27, #slider28, #slider29, #slider30, #slider31, #slider32, #slider33, #slider34, #slider35, #slider36, #slider37, #slider38, #slider39, #slider40 {
+        height: 20px;
+        left:50px;
+        width:85%;
+        top:10%;
+    }
+    #slider1 .ui-slider-range ,#slider2 .ui-slider-range,#slider3 .ui-slider-range,#slider4 .ui-slider-range,#slider5 .ui-slider-range,#slider6 .ui-slider-range ,#slider7 .ui-slider-range,#slider8 .ui-slider-range,#slider9 .ui-slider-range,#slider10 .ui-slider-range,#slider11 .ui-slider-range ,#slider12 .ui-slider-range,#slider13 .ui-slider-range,#slider14 .ui-slider-range,#slider15 .ui-slider-range,#slider16 .ui-slider-range ,#slider17 .ui-slider-range,#slider18 .ui-slider-range,#slider19 .ui-slider-range,#slider20 .ui-slider-range,#slider21 .ui-slider-range ,#slider22 .ui-slider-range,#slider23 .ui-slider-range,#slider24 .ui-slider-range,#slider25 .ui-slider-range,#slider26 .ui-slider-range ,#slider27 .ui-slider-range,#slider28 .ui-slider-range,#slider29 .ui-slider-range,#slider30 .ui-slider-range,#slider31 .ui-slider-range ,#slider32 .ui-slider-range,#slider33 .ui-slider-range,#slider34 .ui-slider-range,#slider35 .ui-slider-range,#slider36 .ui-slider-range ,#slider37 .ui-slider-range,#slider38 .ui-slider-range,#slider39 .ui-slider-range,#slider40 .ui-slider-range{ background: #1c9c67; }
+    #slider1 .ui-slider-handle , #slider2 .ui-slider-handle, #slider3 .ui-slider-handle, #slider4 .ui-slider-handle, #slider5 .ui-slider-handle, #slider6 .ui-slider-handle , #slider7 .ui-slider-handle, #slider8 .ui-slider-handle, #slider9 .ui-slider-handle, #slider10 .ui-slider-handle, #slider11 .ui-slider-handle , #slider12 .ui-slider-handle, #slider13 .ui-slider-handle, #slider14 .ui-slider-handle, #slider15 .ui-slider-handle, #slider16 .ui-slider-handle , #slider17 .ui-slider-handle, #slider18 .ui-slider-handle, #slider19 .ui-slider-handle, #slider20 .ui-slider-handle, #slider21 .ui-slider-handle , #slider22 .ui-slider-handle, #slider23 .ui-slider-handle, #slider24 .ui-slider-handle, #slider25 .ui-slider-handle, #slider26 .ui-slider-handle , #slider27 .ui-slider-handle, #slider28 .ui-slider-handle, #slider29 .ui-slider-handle, #slider30 .ui-slider-handle, #slider31 .ui-slider-handle , #slider32 .ui-slider-handle, #slider33 .ui-slider-handle, #slider34 .ui-slider-handle, #slider35 .ui-slider-handle, #slider36 .ui-slider-handle , #slider37 .ui-slider-handle, #slider38 .ui-slider-handle, #slider39 .ui-slider-handle, #slider40 .ui-slider-handle{ border-color: #1c9c67; height: 27px;}
+</style>
+
+
+<script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script>
+
+var eq_num;
+var eq_val;
+var equalfile;
+
+// function initialFunction(){
+//     fpexist.stat('/home/volumio/equalizer.txt', function(err, stat) {
+//     // var equalfile = fpexist.readFileSync('/home/volumio/equalizer.txt', 'utf8');
+//         if(err){
+//             console.log('no /home/volumio/equalizer.txt');
+//         }
+//         else {
+//             console.log('find /home/volumio/equalizer.txt');
+//             equalfile = fpexist.readFileSync('/home/volumio/equalizer.txt', 'utf8');
+//             console.log('equalfile = ' + equalfile);
+//         }
+//     });
+// }
+
+
+$(function() {
+
+$( "#slider1" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount1" ).text( ui.value );
+    eq_val = $( "#amount1" ).text();
+    eq_num = 0;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band1 = (eq_val)/4;
+    // console.log(equalfile.band1);
+    sendfunc();
+  }
+});
+$( "#slider2" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount2" ).text( ui.value );
+    eq_val = $( "#amount2" ).text();
+    eq_num = 1;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band2 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider3" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount3" ).text( ui.value );
+    eq_val = $( "#amount3" ).text();
+    eq_num = 2;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band3 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider4" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount4" ).text( ui.value );
+    eq_val = $( "#amount4" ).text();
+    eq_num = 3;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band4 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider5" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount5" ).text( ui.value );
+    eq_val = $( "#amount5" ).text();
+    eq_num = 4;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band5 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider6" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount6" ).text( ui.value );
+    eq_val = $( "#amount6" ).text();
+    eq_num = 5;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band6 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider7" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount7" ).text( ui.value );
+    eq_val = $( "#amount7" ).text();
+    eq_num = 6;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band7 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider8" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount8" ).text( ui.value );
+    eq_val = $( "#amount8" ).text();
+    eq_num = 7;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band8 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider9" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount9" ).text( ui.value );
+    eq_val = $( "#amount9" ).text();
+    eq_num = 8;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band9 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider10" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount10" ).text( ui.value );
+    eq_val = $( "#amount10" ).text();
+    eq_num = 9;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band10 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider11" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount11" ).text( ui.value );
+    eq_val = $( "#amount11" ).text();
+    eq_num = 10;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band11 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider12" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount12" ).text( ui.value );
+    eq_val = $( "#amount12" ).text();
+    eq_num = 11;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band12 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider13" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount13" ).text( ui.value );
+    eq_val = $( "#amount13" ).text();
+    eq_num = 12;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band13 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider14" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount14" ).text( ui.value );
+    eq_val = $( "#amount14" ).text();
+    eq_num = 13;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band14 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider15" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount15" ).text( ui.value );
+    eq_val = $( "#amount15" ).text();
+    eq_num = 14;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band15 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider16" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount16" ).text( ui.value );
+    eq_val = $( "#amount16" ).text();
+    eq_num = 15;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band16 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider17" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount17" ).text( ui.value );
+    eq_val = $( "#amount17" ).text();
+    eq_num = 16;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band17 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider18" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount18" ).text( ui.value );
+    eq_val = $( "#amount18" ).text();
+    eq_num = 17;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band18 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider19" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount19" ).text( ui.value );
+    eq_val = $( "#amount19" ).text();
+    eq_num = 18;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band19 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider20" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount20" ).text( ui.value );
+    eq_val = $( "#amount20" ).text();
+    eq_num = 19;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band20 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider21" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount21" ).text( ui.value );
+    eq_val = $( "#amount21" ).text();
+    eq_num = 20;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band21 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider22" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount22" ).text( ui.value );
+    eq_val = $( "#amount22" ).text();
+    eq_num = 21;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band22 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider23" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount23" ).text( ui.value );
+    eq_val = $( "#amount23" ).text();
+    eq_num = 22;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band23 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider24" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount24" ).text( ui.value );
+    eq_val = $( "#amount24" ).text();
+    eq_num = 23;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band24 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider25" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount25" ).text( ui.value );
+    eq_val = $( "#amount25" ).text();
+    eq_num = 24;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band25 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider26" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount26" ).text( ui.value );
+    eq_val = $( "#amount26" ).text();
+    eq_num = 25;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band26 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider27" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount27" ).text( ui.value );
+    eq_val = $( "#amount27" ).text();
+    eq_num = 26;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band27 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider28" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount28" ).text( ui.value );
+    eq_val = $( "#amount28" ).text();
+    eq_num = 27;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band28 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider29" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount29" ).text( ui.value );
+    eq_val = $( "#amount29" ).text();
+    eq_num = 28;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band29 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider30" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount30" ).text( ui.value );
+    eq_val = $( "#amount30" ).text();
+    eq_num = 29;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band30 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider31" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount31" ).text( ui.value );
+    eq_val = $( "#amount31" ).text();
+    eq_num = 30;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band31 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider32" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount32" ).text( ui.value );
+    eq_val = $( "#amount32" ).text();
+    eq_num = 31;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band32 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider33" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount33" ).text( ui.value );
+    eq_val = $( "#amount33" ).text();
+    eq_num = 32;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band33 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider34" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount34" ).text( ui.value );
+    eq_val = $( "#amount34" ).text();
+    eq_num = 33;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band34 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider35" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount35" ).text( ui.value );
+    eq_val = $( "#amount35" ).text();
+    eq_num = 34;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band35 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider36" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount36" ).text( ui.value );
+    eq_val = $( "#amount36" ).text();
+    eq_num = 35;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band36 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider37" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount37" ).text( ui.value );
+    eq_val = $( "#amount37" ).text();
+    eq_num = 36;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band37 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider38" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount38" ).text( ui.value );
+    eq_val = $( "#amount38" ).text();
+    eq_num = 37;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band38 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider39" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount39" ).text( ui.value );
+    eq_val = $( "#amount39" ).text();
+    eq_num = 38;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band39 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$( "#slider40" ).slider({
+  range: "min",
+  min: -30,
+  max: 30,
+  value: 0,
+  slide: function( event, ui ) {
+    $( "#amount40" ).text( ui.value );
+    eq_val = $( "#amount40" ).text();
+    eq_num = 39;
+    console.log(eq_val);
+    console.log(eq_num);
+    equalfile.band40 = (eq_val)/4;
+    sendfunc();
+  }
+});
+$.get("cur_equalizer.json", function(data, status){
+    console.log(data);
+    console.log(status);
+    eq_json = data;
+    equalfile = data
+    $( "#slider1" ).slider( "value", ((eq_json.band1)*4) );
+    $( "#slider2" ).slider( "value", ((eq_json.band2)*4) );
+    $( "#slider3" ).slider( "value", ((eq_json.band3)*4) );
+    $( "#slider4" ).slider( "value", ((eq_json.band4)*4) );
+    $( "#slider5" ).slider( "value", ((eq_json.band5)*4) );
+    $( "#slider6" ).slider( "value", ((eq_json.band6)*4) );
+    $( "#slider7" ).slider( "value", ((eq_json.band7)*4) );
+    $( "#slider8" ).slider( "value", ((eq_json.band8)*4) );
+    $( "#slider9" ).slider( "value", ((eq_json.band9)*4) );
+    $( "#slider10" ).slider( "value", ((eq_json.band10)*4) );
+    $( "#slider11" ).slider( "value", ((eq_json.band11)*4) );
+    $( "#slider12" ).slider( "value", ((eq_json.band12)*4) );
+    $( "#slider13" ).slider( "value", ((eq_json.band13)*4) );
+    $( "#slider14" ).slider( "value", ((eq_json.band14)*4) );
+    $( "#slider15" ).slider( "value", ((eq_json.band15)*4) );
+    $( "#slider16" ).slider( "value", ((eq_json.band16)*4) );
+    $( "#slider17" ).slider( "value", ((eq_json.band17)*4) );
+    $( "#slider18" ).slider( "value", ((eq_json.band18)*4) );
+    $( "#slider19" ).slider( "value", ((eq_json.band19)*4) );
+    $( "#slider20" ).slider( "value", ((eq_json.band20)*4) );
+    $( "#slider21" ).slider( "value", ((eq_json.band21)*4) );
+    $( "#slider22" ).slider( "value", ((eq_json.band22)*4) );
+    $( "#slider23" ).slider( "value", ((eq_json.band23)*4) );
+    $( "#slider24" ).slider( "value", ((eq_json.band24)*4) );
+    $( "#slider25" ).slider( "value", ((eq_json.band25)*4) );
+    $( "#slider26" ).slider( "value", ((eq_json.band26)*4) );
+    $( "#slider27" ).slider( "value", ((eq_json.band27)*4) );
+    $( "#slider28" ).slider( "value", ((eq_json.band28)*4) );
+    $( "#slider29" ).slider( "value", ((eq_json.band29)*4) );
+    $( "#slider30" ).slider( "value", ((eq_json.band30)*4) );
+    $( "#slider31" ).slider( "value", ((eq_json.band31)*4) );
+    $( "#slider32" ).slider( "value", ((eq_json.band32)*4) );
+    $( "#slider33" ).slider( "value", ((eq_json.band33)*4) );
+    $( "#slider34" ).slider( "value", ((eq_json.band34)*4) );
+    $( "#slider35" ).slider( "value", ((eq_json.band35)*4) );
+    $( "#slider36" ).slider( "value", ((eq_json.band36)*4) );
+    $( "#slider37" ).slider( "value", ((eq_json.band37)*4) );
+    $( "#slider38" ).slider( "value", ((eq_json.band38)*4) );
+    $( "#slider39" ).slider( "value", ((eq_json.band39)*4) );
+    $( "#slider40" ).slider( "value", ((eq_json.band40)*4) );
+    $( "#amount1" ).text($( "#slider1" ).slider( "value" ) );
+    $( "#amount2" ).text($( "#slider2" ).slider( "value" ) );
+    $( "#amount3" ).text($( "#slider3" ).slider( "value" ) );
+    $( "#amount4" ).text($( "#slider4" ).slider( "value" ) );
+    $( "#amount5" ).text($( "#slider5" ).slider( "value" ) );
+    $( "#amount6" ).text($( "#slider6" ).slider( "value" ) );
+    $( "#amount7" ).text($( "#slider7" ).slider( "value" ) );
+    $( "#amount8" ).text($( "#slider8" ).slider( "value" ) );
+    $( "#amount9" ).text($( "#slider9" ).slider( "value" ) );
+    $( "#amount10" ).text($( "#slider10" ).slider( "value" ) );
+    $( "#amount11" ).text($( "#slider11" ).slider( "value" ) );
+    $( "#amount12" ).text($( "#slider12" ).slider( "value" ) );
+    $( "#amount13" ).text($( "#slider13" ).slider( "value" ) );
+    $( "#amount14" ).text($( "#slider14" ).slider( "value" ) );
+    $( "#amount15" ).text($( "#slider15" ).slider( "value" ) );
+    $( "#amount16" ).text($( "#slider16" ).slider( "value" ) );
+    $( "#amount17" ).text($( "#slider17" ).slider( "value" ) );
+    $( "#amount18" ).text($( "#slider18" ).slider( "value" ) );
+    $( "#amount19" ).text($( "#slider19" ).slider( "value" ) );
+    $( "#amount20" ).text($( "#slider20" ).slider( "value" ) );
+    $( "#amount21" ).text($( "#slider21" ).slider( "value" ) );
+    $( "#amount22" ).text($( "#slider22" ).slider( "value" ) );
+    $( "#amount23" ).text($( "#slider23" ).slider( "value" ) );
+    $( "#amount24" ).text($( "#slider24" ).slider( "value" ) );
+    $( "#amount25" ).text($( "#slider25" ).slider( "value" ) );
+    $( "#amount26" ).text($( "#slider26" ).slider( "value" ) );
+    $( "#amount27" ).text($( "#slider27" ).slider( "value" ) );
+    $( "#amount28" ).text($( "#slider28" ).slider( "value" ) );
+    $( "#amount29" ).text($( "#slider29" ).slider( "value" ) );
+    $( "#amount30" ).text($( "#slider30" ).slider( "value" ) );
+    $( "#amount31" ).text($( "#slider31" ).slider( "value" ) );
+    $( "#amount32" ).text($( "#slider32" ).slider( "value" ) );
+    $( "#amount33" ).text($( "#slider33" ).slider( "value" ) );
+    $( "#amount34" ).text($( "#slider34" ).slider( "value" ) );
+    $( "#amount35" ).text($( "#slider35" ).slider( "value" ) );
+    $( "#amount36" ).text($( "#slider36" ).slider( "value" ) );
+    $( "#amount37" ).text($( "#slider37" ).slider( "value" ) );
+    $( "#amount38" ).text($( "#slider38" ).slider( "value" ) );
+    $( "#amount39" ).text($( "#slider39" ).slider( "value" ) );
+    $( "#amount40" ).text($( "#slider40" ).slider( "value" ) );
+    // eq_json = JSON.parse(data);
+    // console.log('band1 = ' + eq_json.band1);
+});
+
+});
+
+  // function unloadfunc(){
+  //   var data = '';
+  //   alert($( "#slider40" ).slider( "value" ));
+  // }
+  var loadflag;
+  loadflag = 0;
+  var filename;
+
+  function load(list){
+    console.log("load");
+      if(loadflag == 1){
+        // console.log("1");
+        document.getElementById("theList").style.visibility="hidden";
+        document.getElementById("OK").style.visibility="hidden";
+        document.getElementById("Del").style.visibility="hidden";
+        document.getElementById("load").innerText="...";
+        loadflag=0;
+      }
+      else if(loadflag == 0){
+        // console.log("0");
+        document.getElementById("theList").style.visibility="visible"
+        document.getElementById("OK").style.visibility="visible"
+        document.getElementById("Del").style.visibility="visible"
+        document.getElementById("load").innerText=" ^ ";
+        loadflag=1;
+      }
+      $.get("equal_name", function(data, status){
+        // console.log(data);
+        // console.log(status);
+        for(var i = 0; i < list.options.length; i++){
+          list.options[i] = null;
+        }
+        var index;
+        index = 0;
+        var lines = data.split('\n');
+        var flag = 0;
+        for(var line = 0; line < lines.length; line++){
+          // console.log(line + lines[line]);
+          flag = 0;
+          for(var i = 0; i<line; i++){
+            if(lines[line] == lines[i]){
+              flag = 1;
+            }
+          }
+          if(lines[line].trim() != "" && flag == 0){
+            list.options[index]=new Option(lines[line].replace(".json","") , lines[line]);
+            index = index + 1;
+          }
+        }
+      })
+  }
+
+  function renew(index){
+    filename = index;
+    console.log(filename);
+    
+  }
+
+  function Delfunc(){
+    console.log(filename);
+    var info = {
+                select : 12,
+                name : filename,
+			}
+			var userdata = JSON.stringify(info);
+			console.log(userdata);
+			$.ajax({
+				type:'POST',
+				url:'http://192.168.211.1:6140',
+				data:userdata,
+				success: function(retval) {
+					console.log(retval);
+				},
+				error:function() {
+					console.log("<error> HUGIN flew away =[");
+				}
+      });
+  }
+
+  function OKfunc(){
+    console.log(filename);
+    var info = {
+                select : 11,
+                name : filename,
+			}
+			var userdata = JSON.stringify(info);
+			console.log(userdata);
+			$.ajax({
+				type:'POST',
+				url:'http://192.168.211.1:6140',
+				data:userdata,
+				success: function(retval) {
+					console.log(retval);
+				},
+				error:function() {
+					console.log("<error> HUGIN flew away =[");
+				}
+      });
+      document.getElementById("OK").disabled = true;
+			document.getElementById("Del").disabled = true;
+			document.getElementById("theList").disabled = true;
+			setTimeout(function() {
+				document.getElementById("OK").disabled = false;
+				document.getElementById("Del").disabled = false;
+				document.getElementById("theList").disabled = false;
+      }, 3000);
+      setTimeout(function() {
+        $.get("cur_equalizer.json", function(data, status){
+        console.log(data);
+        // console.log(status);
+        eq_json = data;
+        // equalfile = data
+        // band1 = ((eq_json.band1)*4);
+        // console.log('equalfile = ' + equalfile.band1);
+        // console.log('equalfile = ' + equalfile.band2);
+        $( "#slider1" ).slider( "value", ((eq_json.band1)*4) );
+        $( "#slider2" ).slider( "value", ((eq_json.band2)*4) );
+        $( "#slider3" ).slider( "value", ((eq_json.band3)*4) );
+        $( "#slider4" ).slider( "value", ((eq_json.band4)*4) );
+        $( "#slider5" ).slider( "value", ((eq_json.band5)*4) );
+        $( "#slider6" ).slider( "value", ((eq_json.band6)*4) );
+        $( "#slider7" ).slider( "value", ((eq_json.band7)*4) );
+        $( "#slider8" ).slider( "value", ((eq_json.band8)*4) );
+        $( "#slider9" ).slider( "value", ((eq_json.band9)*4) );
+        $( "#slider10" ).slider( "value", ((eq_json.band10)*4) );
+        $( "#slider11" ).slider( "value", ((eq_json.band11)*4) );
+        $( "#slider12" ).slider( "value", ((eq_json.band12)*4) );
+        $( "#slider13" ).slider( "value", ((eq_json.band13)*4) );
+        $( "#slider14" ).slider( "value", ((eq_json.band14)*4) );
+        $( "#slider15" ).slider( "value", ((eq_json.band15)*4) );
+        $( "#slider16" ).slider( "value", ((eq_json.band16)*4) );
+        $( "#slider17" ).slider( "value", ((eq_json.band17)*4) );
+        $( "#slider18" ).slider( "value", ((eq_json.band18)*4) );
+        $( "#slider19" ).slider( "value", ((eq_json.band19)*4) );
+        $( "#slider20" ).slider( "value", ((eq_json.band20)*4) );
+        $( "#slider21" ).slider( "value", ((eq_json.band21)*4) );
+        $( "#slider22" ).slider( "value", ((eq_json.band22)*4) );
+        $( "#slider23" ).slider( "value", ((eq_json.band23)*4) );
+        $( "#slider24" ).slider( "value", ((eq_json.band24)*4) );
+        $( "#slider25" ).slider( "value", ((eq_json.band25)*4) );
+        $( "#slider26" ).slider( "value", ((eq_json.band26)*4) );
+        $( "#slider27" ).slider( "value", ((eq_json.band27)*4) );
+        $( "#slider28" ).slider( "value", ((eq_json.band28)*4) );
+        $( "#slider29" ).slider( "value", ((eq_json.band29)*4) );
+        $( "#slider30" ).slider( "value", ((eq_json.band30)*4) );
+        $( "#slider31" ).slider( "value", ((eq_json.band31)*4) );
+        $( "#slider32" ).slider( "value", ((eq_json.band32)*4) );
+        $( "#slider33" ).slider( "value", ((eq_json.band33)*4) );
+        $( "#slider34" ).slider( "value", ((eq_json.band34)*4) );
+        $( "#slider35" ).slider( "value", ((eq_json.band35)*4) );
+        $( "#slider36" ).slider( "value", ((eq_json.band36)*4) );
+        $( "#slider37" ).slider( "value", ((eq_json.band37)*4) );
+        $( "#slider38" ).slider( "value", ((eq_json.band38)*4) );
+        $( "#slider39" ).slider( "value", ((eq_json.band39)*4) );
+        $( "#slider40" ).slider( "value", ((eq_json.band40)*4) );
+        $( "#amount1" ).text($( "#slider1" ).slider( "value" ) );
+        $( "#amount2" ).text($( "#slider2" ).slider( "value" ) );
+        $( "#amount3" ).text($( "#slider3" ).slider( "value" ) );
+        $( "#amount4" ).text($( "#slider4" ).slider( "value" ) );
+        $( "#amount5" ).text($( "#slider5" ).slider( "value" ) );
+        $( "#amount6" ).text($( "#slider6" ).slider( "value" ) );
+        $( "#amount7" ).text($( "#slider7" ).slider( "value" ) );
+        $( "#amount8" ).text($( "#slider8" ).slider( "value" ) );
+        $( "#amount9" ).text($( "#slider9" ).slider( "value" ) );
+        $( "#amount10" ).text($( "#slider10" ).slider( "value" ) );
+        $( "#amount11" ).text($( "#slider11" ).slider( "value" ) );
+        $( "#amount12" ).text($( "#slider12" ).slider( "value" ) );
+        $( "#amount13" ).text($( "#slider13" ).slider( "value" ) );
+        $( "#amount14" ).text($( "#slider14" ).slider( "value" ) );
+        $( "#amount15" ).text($( "#slider15" ).slider( "value" ) );
+        $( "#amount16" ).text($( "#slider16" ).slider( "value" ) );
+        $( "#amount17" ).text($( "#slider17" ).slider( "value" ) );
+        $( "#amount18" ).text($( "#slider18" ).slider( "value" ) );
+        $( "#amount19" ).text($( "#slider19" ).slider( "value" ) );
+        $( "#amount20" ).text($( "#slider20" ).slider( "value" ) );
+        $( "#amount21" ).text($( "#slider21" ).slider( "value" ) );
+        $( "#amount22" ).text($( "#slider22" ).slider( "value" ) );
+        $( "#amount23" ).text($( "#slider23" ).slider( "value" ) );
+        $( "#amount24" ).text($( "#slider24" ).slider( "value" ) );
+        $( "#amount25" ).text($( "#slider25" ).slider( "value" ) );
+        $( "#amount26" ).text($( "#slider26" ).slider( "value" ) );
+        $( "#amount27" ).text($( "#slider27" ).slider( "value" ) );
+        $( "#amount28" ).text($( "#slider28" ).slider( "value" ) );
+        $( "#amount29" ).text($( "#slider29" ).slider( "value" ) );
+        $( "#amount30" ).text($( "#slider30" ).slider( "value" ) );
+        $( "#amount31" ).text($( "#slider31" ).slider( "value" ) );
+        $( "#amount32" ).text($( "#slider32" ).slider( "value" ) );
+        $( "#amount33" ).text($( "#slider33" ).slider( "value" ) );
+        $( "#amount34" ).text($( "#slider34" ).slider( "value" ) );
+        $( "#amount35" ).text($( "#slider35" ).slider( "value" ) );
+        $( "#amount36" ).text($( "#slider36" ).slider( "value" ) );
+        $( "#amount37" ).text($( "#slider37" ).slider( "value" ) );
+        $( "#amount38" ).text($( "#slider38" ).slider( "value" ) );
+        $( "#amount39" ).text($( "#slider39" ).slider( "value" ) );
+        $( "#amount40" ).text($( "#slider40" ).slider( "value" ) );
+      });
+      }, 200);
+      
+  }
+
+  function save(){			
+    var eq_name = document.getElementById('eq_name').value;
+    if(eq_name.trim() != ""){
+      var info = {
+                  select : 10,
+                  name : eq_name,
+                  cur_equalizer : equalfile,
+        }
+        var userdata = JSON.stringify(info);
+        console.log(userdata);
+        $.ajax({
+          type:'POST',
+          url:'http://192.168.211.1:6140',
+          data:userdata,
+          success: function(retval) {
+            console.log(retval);
+          },
+          error:function() {
+            console.log("<error> HUGIN flew away =[");
+          }
+        });
+    }
+      // $.get("equal_name", function(data, status){
+      //   console.log(data);
+        
+      // });
+    
+  }
+
+  function sendfunc() {
+			var info = {
+                select : 8,
+                mixer_control : eq_num,
+                playback : eq_val,
+                cur_equalizer : equalfile,
+			}
+			var userdata = JSON.stringify(info);
+			console.log(userdata);
+			$.ajax({
+				type:'POST',
+				url:'http://192.168.211.1:6140',
+				data:userdata,
+				success: function(retval) {
+					console.log(retval);
+				},
+				error:function() {
+					console.log("<error> HUGIN flew away =[");
+				}
+			});
+		}
+
+</script>
+
+</body>
+</html>
